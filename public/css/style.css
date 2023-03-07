@@ -1,0 +1,101 @@
+nav {
+    background: #F8F9FA;
+}
+
+nav .nav .nav-item:hover {
+    cursor: pointer;
+}
+
+nav .nav .nav-item a:hover {
+    color: orange!important;
+}
+
+nav .nav .nav-item .active {
+    color: orange!important;
+}
+
+.auth-form a {
+    text-decoration: none;
+}
+
+.auth-form .register form div, .auth-form .login form div, .profile .profile-inner .profile-data .profile-data-detail form div, .job_post_form .container .form form div {
+    margin-bottom: 2%;
+}
+
+.profile .profile-inner .profile-data .nav .nav-item {
+    cursor: pointer;
+}
+
+.profile .profile-inner .profile-data .nav .nav-item a {
+    color: rgb(0, 128, 255)!important;
+}
+
+.profile .profile-inner .profile-data .profile-data-detail textarea {
+    resize: none;
+}
+
+.home {
+    height: 70vh;
+    padding: 2% 9%;
+}
+
+.home .alert {
+    position:absolute;
+    top:56px;
+    right:0px;
+}
+
+.home .home-inner .home-search-area form .home-search-input .home-search-input-inner {
+    height: 40px;
+    margin-bottom: 5%;
+}
+
+.job_post_form .container {
+    margin-bottom: 100px;
+}
+
+.job_post_form .container .form form .form-input textarea {
+    resize: none;
+}
+
+.job_post_list {
+    display: flex;
+    justify-content: center;
+}
+
+.job_post_list .alert {
+    position:absolute;
+    top:56px;
+    right:0px;
+}
+
+.job_post_list .job_post_list_inner {
+    width: 1000px;
+}
+
+.job_post_list .job_post_list_inner table tbody td a {
+    text-decoration: none;
+}
+
+.job_post_list .job_post_list_inner table tbody td .btn-edit:hover {
+    background: rgb(36, 112, 255);
+    color: white;
+}
+
+.job_post_list .job_post_list_inner table tbody td .btn-delete:hover {
+    background: rgb(241, 58, 58);
+    color: white;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: #F8F9FA;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.footer p {
+    color: rgb(0, 128, 255);
+}
+

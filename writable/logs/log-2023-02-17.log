@@ -1,0 +1,20 @@
+CRITICAL - 2023-02-17 16:00:25 --> Object of class App\Models\My_model could not be converted to string
+in APPPATH\Controllers\JobPostList.php on line 10.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\JobPostList->index()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\JobPostList))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-02-17 17:29:11 --> Object of class App\Models\My_model could not be converted to string
+in APPPATH\Controllers\JobPostList.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\JobPostList->index()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\JobPostList))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-02-17 17:29:40 --> implode(): Invalid arguments passed
+in APPPATH\Controllers\JobPostList.php on line 12.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'implode(): Invalid arguments passed', 'APPPATH\\Controllers\\JobPostList.php', 12, [...])
+ 2 APPPATH\Controllers\JobPostList.php(12): implode(',', Object(App\Models\My_model))
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\JobPostList->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\JobPostList))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
