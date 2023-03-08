@@ -106,7 +106,7 @@
 
                 $query = $this->my_model->count($this->my_table, array('email' => $login_data['email']));
 
-                $user_detail = $this->my_model->select_where($this->my_table, array('email' => $login_data['email']));
+                $user_detail = $this->my_model->select_data_object($this->my_table, array('email' => $login_data['email']));
 
                 if ($query > 0) {
 
