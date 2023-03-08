@@ -33,9 +33,9 @@
         {
             $data['user_id']        =   $this->session->get('user_id');
             $data['user']           =   $this->user->user_data();
-            $data['industry']       =   $this->my_model->select_all(MyTable::Industry);
-            $data['job_function']   =   $this->my_model->select_all(MyTable::Job_Function);
-            $data['location']       =   $this->my_model->select_all(MyTable::Location);
+            $data['industry']       =   $this->my_model->find_for_dropdown(MyTable::Industry);
+            $data['job_function']   =   $this->my_model->find_for_dropdown(MyTable::Job_Function);
+            $data['location']       =   $this->my_model->find_for_dropdown(MyTable::Location);
 
             return view('header', $data)
                   .view('home', $data)
