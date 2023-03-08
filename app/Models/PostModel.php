@@ -29,7 +29,7 @@
 
         }
 
-        public function single_post_data($id) {
+        public function post_data($id) {
 
             $post = $this->my_model->select_data_object($this->my_table, array('id' => $id));
 

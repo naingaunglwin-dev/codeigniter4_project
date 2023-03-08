@@ -12,13 +12,25 @@
 
         }
 
-
         public function insert_data($table, $data) {
 
             $insert = $this->db->table($table);
             $insert->insert($data);
 
             return true;
+
+        }
+
+        public function find_for_dropdown($table) {
+
+            $select = $this->db->table($table);
+            $select->select('*');
+            
+            foreach ($select->get()->getResult() as $row) {
+                $result[$row->id]   =   $row->name;
+            }
+
+            return $result;
 
         }
 
@@ -29,19 +41,6 @@
                    ->where($where);
 
             return $select->get()->getResultArray();
-
-        }
-
-        public function select_all($table) {
-
-            $select = $this->db->table($table);
-            $select->select('*');
-            
-            foreach ($select->get()->getResult() as $row) {
-                $result[$row->id]   =   $row->name;
-            }
-
-            return $result;
 
         }
 
