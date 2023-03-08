@@ -23,7 +23,7 @@
 
             $session_id = $this->session->get('user_id');
 
-            $user = $this->my_model->select_where($this->my_table, array('id' => $session_id));
+            $user = $this->my_model->select_data_object($this->my_table, array('id' => $session_id));
 
             return $user;
 

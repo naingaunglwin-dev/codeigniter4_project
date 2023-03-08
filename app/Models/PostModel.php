@@ -23,7 +23,7 @@
 
             $session_id = $this->session->get('user_id');
 
-            $post = $this->my_model->select_data($this->my_table, array('user_id' => $session_id));
+            $post = $this->my_model->select_data_array($this->my_table, array('user_id' => $session_id));
 
             return $post;
 
@@ -31,7 +31,7 @@
 
         public function single_post_data($id) {
 
-            $post = $this->my_model->select_where($this->my_table, array('id' => $id));
+            $post = $this->my_model->select_data_object($this->my_table, array('id' => $id));
 
             return $post;
 

@@ -22,7 +22,7 @@
 
         }
 
-        public function select_data($table, $where) {
+        public function select_data_array($table, $where) {
 
             $select = $this->db->table($table);
             $select->select('*')
@@ -45,7 +45,7 @@
 
         }
 
-        public function select_where($table, $where) {
+        public function select_data_object($table, $where) {
 
             $select = $this->db->table($table);
             $select->select('*')
