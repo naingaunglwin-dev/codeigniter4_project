@@ -4,3 +4,5 @@ writable/debugbar/*
 
 .vscode
 .idea
+
+public/img/*
