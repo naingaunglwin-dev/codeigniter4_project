@@ -37,9 +37,7 @@
             $data['job_function']   =   $this->my_model->find_for_dropdown(MyTable::Job_Function);
             $data['location']       =   $this->my_model->find_for_dropdown(MyTable::Location);
 
-            return view('header', $data)
-                  .view('home', $data)
-                  .view('footer');
+            return $this->view('home', $data, $data);
 
         }
 
@@ -54,7 +52,6 @@
 
             if (!empty($data)) {
                 $result_data = '';
-
                 foreach ($data as $row) {
                     $result_data .= '<tr>';
                     $result_data .= '<td class="w-50">'. $row['title'] . '</td>';
@@ -63,13 +60,10 @@
                     $result_data .= '<td><a href="' . base_url('post/detail'). '/' .$row['id'] .'">View Detail</a></td>';
                     $result_data .= '</tr>';
                 }
-
                 $result = array('status' => 'success', 'data' => $result_data);
 
             } else {
-
                 $result = array('status' => 'error');
-
             }
 
 
@@ -82,10 +76,7 @@
             $data['user']           =   $this->user->user_data();
             $data['detail']         =   $this->job_detail->post_detail($id);
 
-            return view('header', $data)
-                  .view('job_post_detail', $data)
-                  .view('footer');
-
+            return $this->view('job_post_detail', $data, $data);
         }
 
     }

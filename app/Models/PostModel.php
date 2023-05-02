@@ -12,8 +12,6 @@
         protected $session;
 
         public function __construct() {
-
-            $this->my_table = MyTable::Job_Post;
             $this->my_model = new MyModel;
             $this->session  = \Config\Services::session();
 
@@ -23,17 +21,13 @@
 
             $session_id = $this->session->get('user_id');
 
-            $post = $this->my_model->select_data_array($this->my_table, array('user_id' => $session_id));
-
-            return $post;
+            return $this->my_model->select_data_array(MyTable::Job_Post, array('user_id' => $session_id));
 
         }
 
         public function post_data($id) {
 
-            $post = $this->my_model->select_data_object($this->my_table, array('id' => $id));
-
-            return $post;
+            return $this->my_model->select_data_object(MyTable::Job_Post, array('id' => $id));
 
         }
 

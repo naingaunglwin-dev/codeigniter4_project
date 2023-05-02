@@ -1,9 +1,11 @@
 <section class="d-flex justify-content-center w-100 mb-5">
 
     <div class="container">
-        <div class="detail-items">
-            <img src="<?php echo base_url('img/'. $detail->img_loc); ?>" width="100" height="100" alt="">
-        </div>
+        <?php if ($detail->img_loc): ?>
+            <div class="detail-items">
+                <img src="<?php echo base_url('img/'. $detail->img_loc); ?>" width="100" height="100" alt="">
+            </div>
+        <?php endif; ?>
         <div class="detail-items">
             <h3><?php echo $detail->title; ?></h3>
         </div>

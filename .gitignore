@@ -1,0 +1,6 @@
+writable/logs/*
+writable/session/*
+writable/debugbar/*
+
+.vscode
+.idea

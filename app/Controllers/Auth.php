@@ -6,17 +6,15 @@
     use App\Models\MyTable;
     use App\Models\UserModel;
 
-    class Auth extends BaseController {
+    class Auth extends BaseController 
+    {
 
         protected $helpers = ['form','url'];
-        protected $session;
         protected $my_model;
         protected $my_table;
         protected $user;
 
         public function __construct() {
-            
-            $this->session  = \Config\Services::session();
             $this->my_model = new MyModel;
             $this->my_table = MyTable::User;
             $this->user     = new UserModel;
@@ -25,9 +23,7 @@
 
         public function index() {
 
-            return view('header')
-                  .view('auth/login')
-                  .view('footer');
+            return $this->view('auth/login');
 
         }
 
@@ -39,7 +35,7 @@
                     'first_name'     =>   $this->request->getVar('first_name'),
                     'last_name'      =>   $this->request->getVar('last_name'),
                     'email'          =>   $this->request->getVar('email'),
-                    'password'       =>   $this->request->getVar('password'),
+                    'password'       =>   password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                     'description'    =>   $this->request->getVar('description')
                 ];
 
@@ -89,9 +85,7 @@
             $data['email_error']        = $this->session->getFlashdata('email_error');
             $data['validation_error']   = $this->session->getFlashdata('validation_error');
 
-            return view('header')
-                  .view('auth/register', $data)
-                  .view('footer');
+            return $this->view('auth/register', null, $data);
 
         }
 
@@ -121,13 +115,9 @@
                     ];
 
                     if ($this->validateData($login, $rules)) {
-
-                        if ($login_data['password'] != $user_detail->password) {
-
+                        if (password_verify($login_data['password'], $user_detail->password)) {
                             $this->session->setFlashdata('login_password_error', 'Password wrong! Please Check Again!');
-
                         } else {
-
                             $user_id = $user_detail->id;
                             $this->session->set('user_id', $user_id);
                             $update_type = [
@@ -137,30 +127,21 @@
                             $this->my_model->update_data($this->my_table, $update_type, $user_detail->id);
 
                             return redirect()->to(base_url());
-
                         }
-
                     } else {
-
                         $this->session->setFlashdata('login_validation_error', $this->validator->getErrors());
-
                     }
 
                 } else {
-
                     $this->session->setFlashdata('login_email_error', 'Account with this Email not found!');
-
                 }
-
             }
 
             $data['login_validation_error'] =   $this->session->getFlashdata('login_validation_error');
             $data['login_password_error']   =   $this->session->getFlashdata('login_password_error');
             $data['login_email_error']      =   $this->session->getFlashdata('login_email_error');
 
-            return view('header')
-                  .view('auth/login', $data)
-                  .view('footer');
+            return $this->view('auth/login', null, $data);
 
         }
 
@@ -229,9 +210,7 @@
             $data['update_success']     =   $this->session->getFlashdata('update_success');
             $data['validation_error']   =   $this->session->getFlashdata('profile_validation_error');
 
-            return view('header', $data)
-                  .view('auth/profile', $data)
-                  .view('footer');
+            return $this->view('auth/profile', $data, $data);
 
         }
 
@@ -267,15 +246,10 @@
                         $this->session->setFlashdata('update_password_success', 'Password Updated Successfully');
 
                     } else {
-
                         $this->session->setFlashdata("password_error", "Current Password didn't match!");
-
                     }
-
                 } else {
-
                     $this->session->setFlashdata('password_validation_error', $this->validator->getErrors());
-
                 }
 
             }
@@ -284,9 +258,7 @@
             $data['password_error']             = $this->session->getFlashdata('password_error');
             $data['validation_error']           = $this->session->getFlashdata('password_validation_error');
 
-            return view('header', $data)
-                  .view('auth/profile', $data)
-                  .view('footer');
+            return $this->view('auth/profile', $data, $data);
 
         }
 

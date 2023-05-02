@@ -7,6 +7,7 @@
     use App\Models\UserModel;
     use App\Models\PostModel;
     use CodeIgniter\I18n\Time;
+    use Config\Services;
 
     class JobPost extends BaseController {
 
@@ -15,7 +16,6 @@
         protected $my_model;
         protected $user;
         protected $post;
-        protected $session;
         protected $validation;
         protected $time;
 
@@ -25,8 +25,7 @@
             $this->my_model     = new MyModel;
             $this->user         = new UserModel;
             $this->post         = new PostModel;
-            $this->session      = \Config\Services::session();
-            $this->validation   = \Config\Services::validation();
+            $this->validation   = Services::validation();
             $this->time         = new Time();
 
         }
@@ -84,17 +83,30 @@
                 $description        =   $this->request->getVar('description');
                 $apply_method       =   $this->request->getVar('apply_method');
 
-                $this->validation->setRules ([
-                    'post_photo'        =>  ['label' => 'Photo', 'rules' => 'required|permit_empty|uploaded[post_photo]|max_size[post_photo,10240]'],
-                    'title'             =>  ['label' => 'Title', 'rules' => 'required'],
-                    'location'          =>  ['label' => 'Location', 'rules' => 'required'],
-                    'industry'          =>  ['label' => 'Industry', 'rules' => 'required'],
-                    'job_function'      =>  ['label' => 'Job Function', 'rules' => 'required'],
-                    'responsibilities'  =>  ['label' => 'Responsibilities', 'rules' => 'required'],
-                    'requirement'       =>  ['label' => 'Requirement', 'rules' => 'required'],
-                    'description'       =>  ['label' => 'Description', 'rules' => 'required'],
-                    'apply_method'      =>  ['label' => 'Apply Method', 'rules' => 'required']
-                ]);
+                if (!empty($photo)) {
+                    $this->validation->setRules ([
+                        'post_photo'        =>  ['label' => 'Photo', 'rules' => 'permit_empty|uploaded[post_photo]|max_size[post_photo,10240]'],
+                        'title'             =>  ['label' => 'Title', 'rules' => 'required'],
+                        'location'          =>  ['label' => 'Location', 'rules' => 'required'],
+                        'industry'          =>  ['label' => 'Industry', 'rules' => 'required'],
+                        'job_function'      =>  ['label' => 'Job Function', 'rules' => 'required'],
+                        'responsibilities'  =>  ['label' => 'Responsibilities', 'rules' => 'required'],
+                        'requirement'       =>  ['label' => 'Requirement', 'rules' => 'required'],
+                        'description'       =>  ['label' => 'Description', 'rules' => 'required'],
+                        'apply_method'      =>  ['label' => 'Apply Method', 'rules' => 'required']
+                    ]);
+                } else {
+                    $this->validation->setRules ([
+                        'title'             =>  ['label' => 'Title', 'rules' => 'required'],
+                        'location'          =>  ['label' => 'Location', 'rules' => 'required'],
+                        'industry'          =>  ['label' => 'Industry', 'rules' => 'required'],
+                        'job_function'      =>  ['label' => 'Job Function', 'rules' => 'required'],
+                        'responsibilities'  =>  ['label' => 'Responsibilities', 'rules' => 'required'],
+                        'requirement'       =>  ['label' => 'Requirement', 'rules' => 'required'],
+                        'description'       =>  ['label' => 'Description', 'rules' => 'required'],
+                        'apply_method'      =>  ['label' => 'Apply Method', 'rules' => 'required']
+                    ]);
+                }
 
                 $validation_data = [
                     'post_photo'        =>  $photo,
@@ -173,9 +185,7 @@
             $data['post_validation_error']  = $this->session->getFlashdata('post_validation_error');
             $data['upload_error']           = $this->session->getFlashdata('upload_error');
 
-            return view('header', $data)
-                  .view('job_post', $data)
-                  .view('footer');
+            return $this->view('job_post', $data, $data);
         }
 
         public function post_delete($id) {
@@ -205,9 +215,7 @@
 
             }
 
-            return view('header', $data)
-                  .view('job_post_list')
-                  .view('footer');
+            return $this->view('job_post_list', $data);
 
         }
 
